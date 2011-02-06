@@ -1,0 +1,9 @@
+<div class="user-form-container">
+
+  [ <%= link_to 'Login', login_path %> | Register ]
+
+  <%= form_for @user, :url => account_path do |f| %>
+    <%= render :partial => "form", :object => f %>
+    <%= f.submit "Register" %>
+  <% end %>
+</div>

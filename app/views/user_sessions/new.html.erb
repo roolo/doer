@@ -1,0 +1,23 @@
+<div class="user-form-container">
+  [ Login | <%= link_to 'Register', registration_path %> ]
+
+  <%= form_for @user_session do |f| %>
+    <table class="form">
+      <tr>
+        <td class="label-container"><%= f.label :login %></td>
+        <td class="field-container">
+          <%= f.text_field :login %>
+          <%= f.error_message_on(:login) %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= f.label :password %></td>
+        <td class="field-container">
+          <%= f.password_field :password %>
+          <%= f.error_message_on(:password) %>
+        </td>
+      </tr>
+    </table>
+    <p><%= f.submit "Submit" %></p>
+  <% end %>
+</div>

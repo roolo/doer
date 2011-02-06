@@ -1,0 +1,30 @@
+<table class="form">
+  <tr>
+    <td class="label-container"><%= form.label :login %></td>
+    <td class="field-container">
+      <%= form.text_field :login %>
+      <%= form.error_message_on(:login) %>
+    </td>
+  </tr>
+  <tr>
+    <td class="label-container"><%= form.label :email %></td>
+    <td class="field-container">
+      <%= form.text_field :email %>
+      <%= form.error_message_on(:email) %>
+    </td>
+  </tr>
+  <tr>
+    <td class="label-container"><%= form.label :password, form.object.new_record? ? nil : "Change password" %></td>
+    <td class="field-container">
+      <%= form.password_field :password %>
+      <%= form.error_message_on(:password) %>
+    </td>
+  </tr>
+  <tr>
+    <td class="label-container"><%= form.label :password_confirmation %></td>
+    <td class="field-container">
+      <%= form.password_field :password_confirmation %>
+      <%= form.error_message_on(:password_confirmation) %>
+    </td>
+  </tr>
+ </table>

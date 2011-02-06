@@ -1,0 +1,6 @@
+<b>new suggestions</b>
+<ul>
+<% @new_suggestions.each do |new_suggestion| %>
+  <li><%= raw new_suggestion.name + ' - ' + suggestion_agree_link_to(new_suggestion.id) %></li>
+<% end %>
+</ul>

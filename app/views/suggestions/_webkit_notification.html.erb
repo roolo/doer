@@ -1,0 +1,12 @@
+if (window.webkitNotifications.checkPermission() == 0) {
+  <% if notification_params[:type].nil? || notification_params[:type] == 'plain' %>
+    <%= render :partial => 'webkit_notification_call', :locals => {:notification_params => notification_params} %>
+  <% else %>
+    <%= render :partial => 'webkit_html_notification_call', :locals => {:notification_params => notification_params} %>
+  <% end %>
+    notification.show();
+    
+    setTimeout(function(){
+      notification.cancel();
+    }, '10000');
+}

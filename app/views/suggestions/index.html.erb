@@ -1,0 +1,25 @@
+<h1>Listing suggestions</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Active</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @suggestions.each do |suggestion| %>
+  <tr>
+    <td><%= link_to suggestion.name, url_for(:action => :show, :id => suggestion.id, :name => suggestion.to_url_param) %></td>
+    <td><%= suggestion.active %></td>
+    <td><%= link_to 'Show', suggestion %></td>
+    <td><%= link_to 'Edit', edit_suggestion_path(suggestion) if suggestion.user_id == current_user.id%></td>
+    <td><%= link_to 'Destroy', suggestion, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Suggestion', new_suggestion_path %>

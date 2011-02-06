@@ -1,0 +1,7 @@
+<b>Updates since <%= Time.at(params[:last_update_stamp].to_i) %> till <%= Time.now %></b>
+
+<% if !@participants[:updated].nil? && @participants[:updated].size > 0 %>
+  <%= @participants[:updated].each do |updated_participant| %>
+    <%= render updated_participant %>
+  <% end %>
+<% end %>

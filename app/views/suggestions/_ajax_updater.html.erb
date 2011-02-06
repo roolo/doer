@@ -1,0 +1,13 @@
+<%= javascript_tag do %>
+  setTimeout(
+    function(){
+      <%= remote_function :url => url_for(
+                            :action => 'news_from',
+                            :suggestion_id => suggestion_id,
+                            :last_update_stamp => Time.now.to_i
+                          )
+      %>
+    },
+    15000
+  )
+<% end %>

@@ -1,0 +1,46 @@
+<td><%= users_decision.user %></td>
+<td>
+  <% if users_decision.user_id == current_user.id %>
+    <%= collection_select   :changing_mind, 
+                            :decision_id, 
+                            Decision.find(
+                              :all, 
+                              :order=>'name'
+                            ),
+                            :id, 
+                            :name, 
+                            {:selected => users_decision.decision_id}, 
+                            {:onChange => remote_function(
+                              :url => '/suggestions/'+(users_decision.suggestion_id.to_s)+'/set_decision',
+                              :with => "'decision_id='+this.value"
+                              )
+                            }
+     %>
+  <% else %>
+    <%= users_decision.decision %>
+  <% end %>
+</td>
+<td>
+  <% if users_decision.user_id == current_user.id %>
+    <%= collection_select   :changing_mind, 
+                            :decision_status_id, 
+                            (DecisionStatus.find(
+                              :all, 
+                              :order=>'name'
+                            ).to_a),
+                            :id, 
+                            :name, 
+                            { :selected => users_decision.decision_status_id}, 
+                            { :onChange => remote_function(
+                              :url => '/suggestions/'+(users_decision.suggestion_id.to_s)+'/set_decision_status',
+                              :with => "'decision_status_id='+this.value"
+                              )
+                            }
+     %>
+  <% else %>
+    <%= users_decision.decision_status %>
+  <% end %>
+</td>
+<td>
+  <%= users_decision.updated_at %>
+</td>

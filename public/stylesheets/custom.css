@@ -1,0 +1,32 @@
+.formError {
+  display:    inline;
+  font-size:  10px;
+}
+
+table.form td {
+  border-bottom:  1px solid black;
+}
+
+div.user-form-container {
+  border: 5px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  width:  430px;
+  text-align: center;
+}
+
+td.field-container, td.label-container {
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table.form {
+  width:  100%;
+}
+
+#user-nav {
+  float: right;
+}

@@ -1,0 +1,69 @@
+# New
+if !@participants[:new].nil? && @participants[:new].size > 0
+  page.insert_html(:bottom, :participants, render(@participants[:new]))
+  
+  @participants[:new].each do |new_participant| 
+    if new_participant.user_id != current_user.id
+      page << render( :partial => 'webkit_notification',
+                      :locals => {:notification_params => {
+                        :title => new_participant.suggestion, 
+                        :body => sprintf(
+                          '%s %s', 
+                          new_participant.user, 
+                          new_participant.decision
+                        )
+                      }}
+      )
+    end
+    
+  end
+  
+end
+
+#Updated
+if !@participants[:updated].nil? && @participants[:updated].size > 0
+  @participants[:updated].each do |updated_participant|
+    page.replace_html(
+      'users_decision_'+updated_participant.user_id.to_s,
+      render(
+        :partial => 'users_decisions/users_decision_columns',
+        :locals => {
+          :users_decision => updated_participant
+        }
+      )
+    )
+    
+    if updated_participant.user_id != current_user.id
+      page << render( :partial => 'webkit_notification',
+                      :locals => {:notification_params => {
+                        :title => updated_participant.suggestion, 
+                        :body => sprintf(
+                          '%s is %s', 
+                          updated_participant.user, 
+                          updated_participant.decision_status
+                        )
+                      }}
+      )
+    end
+  end
+#  page << "window.open(
+#      '" + url_for(
+#            :action=>'news_from', 
+#            :suggestion_id => params[:suggestion_id], 
+#            :last_update_stamp => params[:last_update_stamp]
+#           ) + "',
+#      'doerUpdatesSince<%= params[:last_update_stamp] %>',
+#      'width=600,height=200'
+#  );"
+end
+
+# New suggestions
+unless @new_suggestions.blank?
+  page << render( :partial => 'webkit_notification',
+                  :locals => { :notification_params => {:url => new_suggestions_since_url(:last_update_stamp => @last_update_stamp), :type => 'html'}}
+  )
+end
+
+page.replace_html(:updater, render(:partial=>'ajax_updater', :locals => {:suggestion_id => params[:suggestion_id]}))
+
+

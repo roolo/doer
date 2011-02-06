@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @suggestion.name %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @suggestion.active %>
+</p>
+
+<%= (link_to( 'Edit', edit_suggestion_path(@suggestion))+' |') if current_user.id == @suggestion.user_id %>
+<%= link_to 'Back to all suggestions', suggestions_path %>
+
+<h2>Decisions:</h2>
+
+<div id="suggestion-agree-link">
+<%= suggestion_agree_link_to @suggestion.id %>
+</div>
+
+<table id="participants">
+  <tr>
+    <th>User</th>
+    <th>Decision</th>
+    <th>Status</th>
+    <th>Last modified</th>
+  </tr>
+  <%= render @suggestion.users_decisions %>
+</table>
+<%= javascript_tag do %>
+  if (window.webkitNotifications.checkPermission() > 0) {
+    document.write('<button onclick="RequestPermission(function(){console.log(\'Notifiable\')});$(\'notification-button\').remove" id="notification-button">Alow this page to notify you</button>');    
+  }
+<% end %>
+<div id="updater">
+<%= render :partial => 'ajax_updater', :locals => {:suggestion_id => @suggestion.id} %>
+</div>
+

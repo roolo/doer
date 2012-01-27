@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+['Agree', 'Disagree'].each do |decision_name|
+  Decision.create name: decision_name
+end
